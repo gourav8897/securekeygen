@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate secure usernames and passwords with customizable options. Includes strength indicators and a dark mode feature.">
+    <meta name="keywords" content="username generator, password generator, secure credentials, web tool">
+    <meta name="author" content="logingsheild">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self';">
+    <title>Username & Password Generator</title>
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Username & Password Generator">
+    <meta property="og:description" content="A simple tool to create secure usernames and passwords with strength indicators and customization options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Username & Password Generator">
+    <meta name="twitter:description" content="Generate secure usernames and passwords easily with this free tool.">
+    <meta name="twitter:image" content="https://yourdomain.com/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/securekeygen.ico">
+
+    <!-- Preload Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="background-animation"></div>
+        <header>
+            <h1>Username & Password Generator</h1>
+            <button id="toggle-dark-mode" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+        </header>
+
+        <section class="generator-section">
+            <h2>Generate Username</h2>
+            <input type="text" id="username" readonly>
+            <div class="controls">
+                <input type="range" id="username-length" min="5" max="20" value="10">
+                <label>Length: <span id="username-length-value">10</span></label>
+            </div>
+            <div class="options">
+                <label><input type="checkbox" id="username-lowercase" checked> Lowercase</label>
+                <label><input type="checkbox" id="username-uppercase"> Uppercase</label>
+                <label><input type="checkbox" id="username-numbers"> Numbers</label>
+                <label><input type="checkbox" id="username-symbols"> Symbols</label>
+            </div>
+            <div class="button-group">
+                <button id="generate-username">Generate Username</button>
+                <button id="copy-username">Copy</button>
+                <button id="clear-username">Clear</button>
+                <button id="save-username">Save</button>
+            </div>
+            <div class="strength-bar"><div id="username-strength-bar"></div></div>
+            <div class="strength-indicator" id="username-strength-indicator" aria-live="polite"></div>
+        </section>
+
+        <section class="generator-section">
+            <h2>Generate Password</h2>
+            <input type="password" id="password" readonly>
+            <div class="controls">
+                <input type="range" id="password-length" min="6" max="30" value="12">
+                <label>Length: <span id="password-length-value">12</span></label>
+            </div>
+            <div class="options">
+                <label><input type="checkbox" id="password-lowercase" checked> Lowercase</label>
+                <label><input type="checkbox" id="password-uppercase"> Uppercase</label>
+                <label><input type="checkbox" id="password-numbers"> Numbers</label>
+                <label><input type="checkbox" id="password-symbols"> Symbols</label>
+            </div>
+            <div class="button-group">
+                <button id="generate-password">Generate Password</button>
+                <button id="copy-password">Copy</button>
+                <button id="clear-password">Clear</button>
+                <button id="save-password">Save</button>
+                <button id="toggle-password" aria-label="Toggle password visibility">👁 Show/Hide</button>
+            </div>
+            <div class="strength-bar"><div id="password-strength-bar"></div></div>
+            <div class="strength-indicator" id="password-strength-indicator" aria-live="polite"></div>
+        </section>
+
+        <section class="saved-items">
+            <h2>Saved Items</h2>
+            <div id="saved-items"></div>
+            <button id="clear-saved-items">Clear Saved Items</button>
+        </section>
+
+        <section class="learn-more">
+            <h2>Learn More</h2>
+            <details class="learn-item">
+                <summary>How to Create Secure Passwords</summary>
+                <p>Creating a secure password is essential for protecting your online accounts. Here are some tips:</p>
+                <ul>
+                    <li><strong>Length Matters:</strong> Aim for at least 12-16 characters. Longer passwords are harder to crack.</li>
+                    <li><strong>Mix It Up:</strong> Use a combination of uppercase letters, lowercase letters, numbers, and symbols.</li>
+                    <li><strong>Avoid Personal Info:</strong> Don’t use your name, birthdate, or common words found in dictionaries.</li>
+                    <li><strong>Unique Passwords:</strong> Never reuse passwords across different sites.</li>
+                    <li><strong>Use a Generator:</strong> Tools like this one can create random, unpredictable passwords that are tough to guess.</li>
+                </ul>
+                <p>Pro Tip: Pair your password with two-factor authentication (2FA) for extra security!</p>
+            </details>
+            <details class="learn-item">
+                <summary>Best Practices for Username Generation</summary>
+                <p>Your username can also play a role in your online security and identity. Follow these best practices:</p>
+                <ul>
+                    <li><strong>Keep It Unique:</strong> Avoid using the same username everywhere to reduce tracking risks.</li>
+                    <li><strong>Balance Memorability:</strong> Make it easy for you to remember but hard for others to guess.</li>
+                    <li><strong>Include Variety:</strong> Add numbers or symbols if the platform allows, but ensure it’s still readable.</li>
+                    <li><strong>Avoid Sensitive Data:</strong> Don’t include your full name, email, or phone number.</li>
+                    <li><strong>Randomize When Possible:</strong> Use this tool to generate unpredictable usernames for added privacy.</li>
+                </ul>
+                <p>A good username protects your identity while staying functional!</p>
+            </details>
+            <details class="learn-item">
+                <summary>Importance of Password Security</summary>
+                <p>Password security is your first line of defense against cyber threats. Here’s why it matters:</p>
+                <ul>
+                    <li><strong>Data Breaches:</strong> Weak passwords are easily cracked, exposing your personal data.</li>
+                    <li><strong>Identity Theft:</strong> Compromised accounts can lead to financial loss or impersonation.</li>
+                    <li><strong>Chain Reaction:</strong> One weak password can unlock multiple accounts if you reuse it.</li>
+                    <li><strong>Modern Threats:</strong> Hackers use sophisticated tools like brute force attacks to guess passwords.</li>
+                    <li><strong>Peace of Mind:</strong> Strong passwords reduce stress and keep your digital life safe.</li>
+                </ul>
+                <p>Invest a little time in security today to avoid big problems tomorrow!</p>
+            </details>
+        </section>
+
+        <section class="feedback">
+            <h2>Feedback</h2>
+            <textarea id="feedback" placeholder="Enter your feedback here..."></textarea>
+            <button id="submit-feedback">Submit</button>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
